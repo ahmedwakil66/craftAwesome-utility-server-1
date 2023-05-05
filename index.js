@@ -29,6 +29,14 @@ app.get('/simply-recipes/chefs', (req, res) => {
 })
 
 
+//send specific chef data
+app.get('/simply-recipes/chefs/:chefId', (req, res) => {
+    const id = req.params.chefId;
+    const chefData = chefsData.find(chef => chef._id === id);
+    res.send(chefData);
+})
+
+
 //building category data from all recipe and sending it
 app.get('/simply-recipes/categories', (req, res) => {
     const categories = [];
@@ -55,7 +63,7 @@ app.get('/simply-recipes/categories/:catName', (req, res) => {
 })
 
 
-//send specific recipe data by chefId
+//send specific chef's recipes data by chefId
 app.get('/simply-recipes/chef/:chefId', (req, res) => {
     const id = req.params.chefId;
     const chef = chefsData.find(chef => chef._id === id);
