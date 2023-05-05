@@ -14,13 +14,13 @@ const qAndA = require('./simply-recipes-data/q&a_data.json');
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send('hi, welcome to craftAwesome utility server 1!');
+    res.send('CraftAwesome utility server 1 is now awake! You can close this page now.');
 })
 
 
 
 //===========================
-//==== Simply Recipes Starts ===
+//== Simply Recipes Starts ==
 //===========================
 
 //send all chef data
@@ -55,12 +55,20 @@ app.get('/simply-recipes/categories/:catName', (req, res) => {
 })
 
 
-//send specific recipe data
+//send specific recipe data by chefId
 app.get('/simply-recipes/chef/:chefId', (req, res) => {
     const id = req.params.chefId;
     const chef = chefsData.find(chef => chef._id === id);
     const chefRecipes = recipesData.filter(recipe => recipe.chef_id === id) || [];
     res.send({chef, chefRecipes});
+})
+
+
+//send specific recipe data by recipe id
+app.get('/simply-recipes/recipes/:recipeId', (req, res) => {
+    const id = req.params.recipeId;
+    const recipeData = recipesData.find(recipe => recipe._id === id) || [];
+    res.send(recipeData);
 })
 
 
@@ -75,7 +83,7 @@ app.get('/simply-recipes/q-and-a', (req, res) => {
     res.send(qAndA);
 })
 //===========================
-//==== Simply Recipes Ends ===
+//=== Simply Recipes Ends ===
 //===========================
 
 
